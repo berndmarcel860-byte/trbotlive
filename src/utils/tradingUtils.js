@@ -59,14 +59,15 @@ export function calculatePositionSize(accountBalance, riskPercent, entryPrice, s
  */
 export function roundToStepSize(value, stepSize) {
   const precision = stepSize.toString().split('.')[1]?.length || 0;
-  return Math.floor(value / stepSize) * stepSize;
+  const rounded = Math.floor(value / stepSize) * stepSize;
+  return parseFloat(rounded.toFixed(precision));
 }
 
 /**
- * Format price with precision
+ * Format price with precision as string
  * @param {number} price - Price to format
  * @param {number} precision - Price precision
- * @returns {string} Formatted price
+ * @returns {string} Formatted price string
  */
 export function formatPrice(price, precision = 8) {
   return parseFloat(price).toFixed(precision);

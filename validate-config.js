@@ -16,6 +16,29 @@ console.log('='.repeat(60));
 let hasErrors = false;
 let hasWarnings = false;
 
+/**
+ * Validate Telegram configuration
+ */
+function validateTelegramConfig() {
+  const hasToken = config.telegram.botToken && config.telegram.botToken !== 'your_telegram_bot_token_here';
+  const hasChatId = config.telegram.chatId && config.telegram.chatId !== 'your_telegram_chat_id_here';
+
+  if (!hasToken) {
+    console.warn('   ⚠️  Telegram bot token not configured (optional)');
+    console.log('   ℹ️  Notifications will be disabled');
+    hasWarnings = true;
+  } else {
+    console.log(`   ✅ Bot Token: ${config.telegram.botToken.substring(0, 10)}...`);
+    
+    if (!hasChatId) {
+      console.warn('   ⚠️  Telegram chat ID not configured');
+      hasWarnings = true;
+    } else {
+      console.log(`   ✅ Chat ID: ${config.telegram.chatId}`);
+    }
+  }
+}
+
 // Check if .env file exists
 if (!fs.existsSync('.env')) {
   console.error('❌ ERROR: .env file not found');
@@ -49,22 +72,7 @@ if (!config.binance.testnet) {
 
 // Validate Telegram Configuration
 console.log('\n📱 Telegram Configuration:');
-if (!config.telegram.botToken || config.telegram.botToken === 'your_telegram_bot_token_here') {
-  console.warn('   ⚠️  Telegram bot token not configured (optional)');
-  console.log('   ℹ️  Notifications will be disabled');
-  hasWarnings = true;
-} else {
-  console.log(`   ✅ Bot Token: ${config.telegram.botToken.substring(0, 10)}...`);
-}
-
-if (!config.telegram.chatId || config.telegram.chatId === 'your_telegram_chat_id_here') {
-  if (config.telegram.botToken && config.telegram.botToken !== 'your_telegram_bot_token_here') {
-    console.warn('   ⚠️  Telegram chat ID not configured');
-    hasWarnings = true;
-  }
-} else {
-  console.log(`   ✅ Chat ID: ${config.telegram.chatId}`);
-}
+validateTelegramConfig();
 
 // Validate Trading Configuration
 console.log('\n💰 Trading Configuration:');

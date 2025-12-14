@@ -73,8 +73,6 @@ class MarketAnalysisService {
         fastPeriod: 12,
         slowPeriod: 26,
         signalPeriod: 9,
-        SimpleMAOscillator: false,
-        SimpleMASignal: false,
       });
 
       const bb = BollingerBands.calculate({

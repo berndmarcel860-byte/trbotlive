@@ -249,10 +249,11 @@ class PositionManager {
 
       if (order) {
         position.dcaExecuted[dcaIndex] = true;
-        position.remainingQuantity += quantity;
         
-        // Recalculate average entry price
-        const totalCost = position.entryPrice * (position.remainingQuantity - quantity) + currentPrice * quantity;
+        // Calculate new average entry price correctly
+        const oldQuantity = position.remainingQuantity;
+        const totalCost = position.entryPrice * oldQuantity + currentPrice * quantity;
+        position.remainingQuantity += quantity;
         position.entryPrice = totalCost / position.remainingQuantity;
 
         logger.info(`DCA ${dcaIndex + 1} executed for ${position.symbol} at ${currentPrice}`);

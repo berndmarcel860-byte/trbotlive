@@ -1,0 +1,32 @@
+{
+  "name": "trbotlive",
+  "version": "1.0.0",
+  "description": "AI Trading Scalping Bot for Binance Futures with institutional-grade features",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "validate": "node validate-config.js",
+    "test": "echo \"Tests will be added\" && exit 0"
+  },
+  "keywords": [
+    "trading",
+    "binance",
+    "futures",
+    "scalping",
+    "fibonacci",
+    "dca",
+    "telegram"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "ccxt": "^4.2.25",
+    "dotenv": "^16.3.1",
+    "node-telegram-bot-api": "^0.64.0",
+    "technicalindicators": "^3.1.0",
+    "winston": "^3.11.0"
+  }
+}
